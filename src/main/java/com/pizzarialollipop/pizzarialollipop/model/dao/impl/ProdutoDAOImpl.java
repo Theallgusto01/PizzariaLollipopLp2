@@ -1,22 +1,22 @@
-package com.pizzarialollipop.pizzarialollipop.pizzaria.dao;
+package com.pizzarialollipop.pizzarialollipop.model.dao.impl;
 
+import com.pizzarialollipop.pizzarialollipop.model.dao.ProdutoDAO;
 import com.pizzarialollipop.pizzarialollipop.pizzaria.model.Pizza;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PizzaDAOImpl implements PizzaDAO {
-    private static final String DB_URL = "jdbc:mysql:pizzaria.db"; // Substitua pelo seu banco de dados
-    private static final String INSERT_SQL = "INSERT INTO pizza (id, name, price, description) VALUES (?, ?, ?, ?)";
-    private static final String SELECT_BY_ID_SQL = "SELECT * FROM pizza WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT * FROM pizza";
+public class ProdutoDAOImpl implements ProdutoDAO {
+    private static final String DB_URL = "jdbc:mysql:pizzaria_BD"; // Substitua pelo seu banco de dados
+    private static final String INSERT_SQL = "INSERT INTO produto (id_p roduto, nome_produto, valor_produto) VALUES (?, ?, ?, ?)";
+    private static final String SELECT_BY_ID_SQL = "SELECT * FROM produto WHERE id = ?";
+    private static final String SELECT_ALL_SQL = "SELECT * FROM produto";
     private static final String UPDATE_SQL = "UPDATE pizza SET name = ?, price = ?, description = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM pizza WHERE id = ?";
 
     static {
         try {
-            // Cria a tabela caso não exista (para fins de teste)
             Connection connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             String createTableSQL = "CREATE TABLE IF NOT EXISTS pizza (" +
