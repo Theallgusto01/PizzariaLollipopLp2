@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pizzarialollipop.pizzarialollipop.Produtos"
+            prefHeight="400.0" prefWidth="600.0">
+
+</AnchorPane>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.pizzarialollipop.pizzarialollipop.controller.ProdutoController">
+
+<Label text="Gerenciamento de Produtos"/>
+
+<HBox spacing="10">
+    <Label text="Nome:"/>
+    <TextField fx:id="txtNome"/>
+</HBox>
+
+<HBox spacing="10">
+    <Label text="Preço:"/>
+    <TextField fx:id="txtPreco"/>
+</HBox>
+
+<HBox spacing="10">
+    <Button text="Adicionar" onAction="#adicionarProduto"/>
+    <Button text="Atualizar" onAction="#atualizarProduto"/>
+    <Button text="Deletar" onAction="#deletarProduto"/>
+</HBox>
+
+<TableView fx:id="tabelaProdutos">
+    <columns>
+        <TableColumn text="ID" fx:id="colId"/>
+        <TableColumn text="Nome" fx:id="colNome"/>
+        <TableColumn text="Preço" fx:id="colPreco"/>
+    </columns>
+</TableView>
+
+</VBox>

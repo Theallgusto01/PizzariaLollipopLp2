@@ -1,131 +1,125 @@
 package com.pizzarialollipop.pizzarialollipop.model.dao.impl;
 
+import com.pizzarialollipop.pizzarialollipop.factory.ConnectionFactory;
 import com.pizzarialollipop.pizzarialollipop.model.dao.ProdutoDAO;
-import com.pizzarialollipop.pizzarialollipop.pizzaria.model.Pizza;
+import com.pizzarialollipop.pizzarialollipop.model.entities.Produto;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAOImpl implements ProdutoDAO {
-    private static final String DB_URL = "jdbc:mysql:pizzaria_BD"; // Substitua pelo seu banco de dados
-    private static final String INSERT_SQL = "INSERT INTO produto (id_p roduto, nome_produto, valor_produto) VALUES (?, ?, ?, ?)";
-    private static final String SELECT_BY_ID_SQL = "SELECT * FROM produto WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT * FROM produto";
-    private static final String UPDATE_SQL = "UPDATE pizza SET name = ?, price = ?, description = ? WHERE id = ?";
-    private static final String DELETE_SQL = "DELETE FROM pizza WHERE id = ?";
 
-    static {
-        try {
-            Connection connection = DriverManager.getConnection(DB_URL);
-            Statement statement = connection.createStatement();
-            String createTableSQL = "CREATE TABLE IF NOT EXISTS pizza (" +
-                    "id INTEGER PRIMARY KEY," +
-                    "name TEXT NOT NULL," +
-                    "price REAL NOT NULL," +
-                    "description TEXT)";
-            statement.execute(createTableSQL);
-            connection.close();
+    private static final String INSERIR_SQL = "INSERT INTO produto (nome_produto, valor_produto) VALUES (?, ?)";
+    private static final String SELECIONAR_POR_ID_SQL = "SELECT id_produto, nome_produto, valor_produto FROM produto WHERE id_produto = ?";
+    private static final String SELECIONAR_TODOS_SQL = "SELECT id_produto, nome_produto, valor_produto FROM produto";
+    private static final String ATUALIZAR_SQL = "UPDATE produto SET nome_produto = ?, valor_produto = ? WHERE id_produto = ?";
+    private static final String DELETAR_SQL = "DELETE FROM produto WHERE id_produto = ?";
+
+    @Override
+    public void create(Produto produto) {
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conexao.prepareStatement(INSERIR_SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, produto.getNome_produto());
+            stmt.setDouble(2, produto.getValor_produto());
+
+                                            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        produto.setId_produto(rs.getInt(1));
+                    }
+                }
+            }
+            System.out.println("Produto adicionado com sucesso: " + produto);
+
         } catch (SQLException e) {
-            System.err.println("Error initializing database: " + e.getMessage());
+            System.err.println("Erro ao adicionar produto: " + e.getMessage());
         }
     }
 
     @Override
-    public void create(Pizza pizza) {
-        try (Connection connection = DriverManager.getConnection(DB_URL);
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
+    public Produto read(int id) {
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conexao.prepareStatement(SELECIONAR_POR_ID_SQL)) {
 
-            preparedStatement.setInt(1, pizza.getId());
-            preparedStatement.setString(2, pizza.getName());
-            preparedStatement.setDouble(3, pizza.getPrice());
-            preparedStatement.executeUpdate();
-            System.out.println("Pizza added: " + pizza);
-
-        } catch (SQLException e) {
-            System.err.println("Error adding pizza: " + e.getMessage());
-        }
-    }
-
-    @Override
-    public Pizza read(int id) {
-        try (Connection connection = DriverManager.getConnection(DB_URL);
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_SQL)) {
-
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                return new Pizza(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getDouble("price")
-                );
+            stmt.setInt(1, id);
+            try (ResultSet resultado = stmt.executeQuery()) {
+                if (resultado.next()) {
+                    return new Produto(
+                            resultado.getInt("id_produto"),
+                            resultado.getDouble("valor_produto"),
+                            resultado.getString("nome_produto")
+                    );
+                }
             }
 
         } catch (SQLException e) {
-            System.err.println("Error reading pizza: " + e.getMessage());
+            System.err.println("Erro ao buscar produto: " + e.getMessage());
         }
         return null;
     }
 
     @Override
-    public List<Pizza> readAll() {
-        List<Pizza> pizzas = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DB_URL);
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_SQL);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+    public List<Produto> readAll() {
+        List<Produto> produtos = new ArrayList<>();
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conexao.prepareStatement(SELECIONAR_TODOS_SQL);
+             ResultSet resultado = stmt.executeQuery()) {
 
-            while (resultSet.next()) {
-                pizzas.add(new Pizza(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getDouble("price"),
-                        resultSet.getString("description")
+            while (resultado.next()) {
+                produtos.add(new Produto(
+                        resultado.getInt("id_produto"),
+                        resultado.getDouble("valor_produto"),
+                        resultado.getString("nome_produto")
                 ));
             }
 
         } catch (SQLException e) {
-            System.err.println("Error reading all pizzas: " + e.getMessage());
+            System.err.println("Erro ao buscar todos os produtos: " + e.getMessage());
         }
-        return pizzas;
+        return produtos;
     }
 
     @Override
-    public void update(Pizza pizza) {
-        try (Connection connection = DriverManager.getConnection(DB_URL);
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
+    public void update(Produto produto) {
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conexao.prepareStatement(ATUALIZAR_SQL)) {
 
-            preparedStatement.setString(1, pizza.getName());
-            preparedStatement.setDouble(2, pizza.getPrice());
-            preparedStatement.setInt(3, pizza.getId());
+            stmt.setString(1, produto.getNome_produto());
+            stmt.setDouble(2, produto.getValor_produto());
+            stmt.setInt(3, produto.getId_produto());
 
-            if (preparedStatement.executeUpdate() > 0) {
-                System.out.println("Pizza updated: " + pizza);
+            int linhasAfetadas = stmt.executeUpdate();
+            if (linhasAfetadas > 0) {
+                System.out.println("Produto atualizado com sucesso: " + produto);
             } else {
-                System.out.println("Pizza not found: ID " + pizza.getId());
+                System.out.println("Produto não encontrado para atualização: ID " + produto.getId_produto());
             }
 
         } catch (SQLException e) {
-            System.err.println("Error updating pizza: " + e.getMessage());
+            System.err.println("Erro ao atualizar produto: " + e.getMessage());
         }
     }
 
     @Override
     public void delete(int id) {
-        try (Connection connection = DriverManager.getConnection(DB_URL);
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)) {
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conexao.prepareStatement(DELETAR_SQL)) {
 
-            preparedStatement.setInt(1, id);
+            stmt.setInt(1, id);
+            int linhasAfetadas = stmt.executeUpdate();
 
-            if (preparedStatement.executeUpdate() > 0) {
-                System.out.println("Pizza deleted: ID " + id);
+            if (linhasAfetadas > 0) {
+                System.out.println("Produto deletado com sucesso: ID " + id);
             } else {
-                System.out.println("Pizza not found: ID " + id);
+                System.out.println("Produto não encontrado para exclusão: ID " + id);
             }
 
         } catch (SQLException e) {
-            System.err.println("Error deleting pizza: " + e.getMessage());
+            System.err.println("Erro ao deletar produto: " + e.getMessage());
         }
     }
 }

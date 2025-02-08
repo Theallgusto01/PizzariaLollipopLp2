@@ -1,12 +1,12 @@
 package com.pizzarialollipop.pizzarialollipop.model.dao;
 
-import com.pizzarialollipop.pizzarialollipop.pizzaria.model.Pizza;
+import com.pizzarialollipop.pizzarialollipop.model.entities.Produto;
 import java.util.List;
 
 public interface ProdutoDAO {
-    void create(Pizza pizza);
-    Pizza read(int id);
-    List<Pizza> readAll();
-    void update(Pizza pizza);
+    void create(Produto produto);
+    Produto read(int id);
+    List<Produto> readAll();
+    void update(Produto produto);
     void delete(int id);
 }
