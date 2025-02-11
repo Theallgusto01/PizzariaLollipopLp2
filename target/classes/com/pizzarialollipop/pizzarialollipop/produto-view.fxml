@@ -9,7 +9,7 @@
     <!-- Container superior com a logo -->
     <top>
         <VBox alignment="CENTER" spacing="10">
-            <ImageView fx:id="logo.png" fitWidth="200" fitHeight="200" />
+
         </VBox>
     </top>
 

@@ -5,14 +5,14 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pizzarialollipop.pizzarialollipop.controller.ApplicationController" style="-fx-background-color: #ADD8E6;">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pizzarialollipop.pizzarialollipop.controller.ApplicationController" style="-fx-background-color: #ADD8E6;">
 
     <children>
         <MenuBar layoutX="100.0" layoutY="50.0" prefHeight="32.0" prefWidth="400.0">
             <menus>
                 <Menu text="Cliente">
                     <items>
-                        <MenuItem fx:id="cadastrarCliente" onAction="#onCadastrarClienteClick" text="Cadastrar" />
+                        <MenuItem fx:id="cadastrarCliente" text="Cadastrar" />
                         <MenuItem fx:id="procurarCliente" onAction="#onProcurarClienteClick" text="Procurar" />
                         <MenuItem fx:id="listarCliente" onAction="#onListarClienteClick" text="Listar Todos" />
                     </items>
