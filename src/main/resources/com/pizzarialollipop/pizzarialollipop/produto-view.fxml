@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.pizzarialollipop.pizzarialollipop.controller.ProdutoController"
+          alignment="CENTER" hgap="10" vgap="10">
+
+    <Label text="Lista de Produtos" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+
+    <TableView fx:id="tableProdutos" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50">
+                <cellValueFactory>
+                    <PropertyValueFactory property="id"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nome"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colPreco" text="Preço" prefWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="preco"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="250">
+                <cellValueFactory>
+                    <PropertyValueFactory property="descricao"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</GridPane>

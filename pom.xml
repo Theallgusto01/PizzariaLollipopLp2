@@ -38,7 +38,14 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>17.0.6</version>
+        </dependency>
     </dependencies>
+
+
 
     <build>
         <plugins>
@@ -61,7 +68,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.pizzarialollipop.pizzarialollipop/com.pizzarialollipop.pizzarialollipop.HelloApplication
+                                com.pizzarialollipop.pizzarialollipop.Application
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

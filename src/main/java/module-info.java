@@ -6,4 +6,9 @@ module com.pizzarialollipop.pizzarialollipop {
 
     opens com.pizzarialollipop.pizzarialollipop to javafx.fxml;
     exports com.pizzarialollipop.pizzarialollipop;
+
+    opens com.pizzarialollipop.pizzarialollipop.controller to javafx.fxml;
+    exports com.pizzarialollipop.pizzarialollipop.controller;
+
+
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.pizzarialollipop.view.CardapioController">
+
+    <!-- Menu Lateral -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #d97b00; -fx-padding: 15px;">
+            <Label text="Olá, Lollipop" style="-fx-font-size: 20px; -fx-text-fill: white;" />
+            <Button text="Cardápio" style="-fx-background-color: #f5c17a;" />
+            <Button text="Pedidos" style="-fx-background-color: #d97b00; -fx-text-fill: white;" />
+            <Button text="Clientes" style="-fx-background-color: #d97b00; -fx-text-fill: white;" />
+            <Button text="Estoque" style="-fx-background-color: #d97b00; -fx-text-fill: white;" />
+            <Button text="Funcionários" style="-fx-background-color: #d97b00; -fx-text-fill: white;" />
+        </VBox>
+    </left>
+
+    <!-- Área Principal -->
+    <center>
+        <VBox spacing="10" padding="20">
+            <Label text="Cardápio" style="-fx-font-size: 30px; -fx-text-fill: orange;" />
+
+            <!-- Lista de Produtos -->
+            <ListView fx:id="listViewProdutos" prefHeight="250" />
+
+            <!-- Botões Ações -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Cadastrar" onAction="#cadastrarProduto" />
+                <Button text="Editar" onAction="#editarProduto" />
+                <Button text="Remover" onAction="#removerProduto" />
+                <Button text="Listar" onAction="#listarProdutos" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

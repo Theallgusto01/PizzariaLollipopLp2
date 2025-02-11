@@ -40,7 +40,7 @@ public class ClienteDAOImpl implements ClienteDAO {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao adicionar cliente: " + e.getMessage(), e);
         }
-    }   
+    }
 
     @Override
     public Cliente read(int id) {
