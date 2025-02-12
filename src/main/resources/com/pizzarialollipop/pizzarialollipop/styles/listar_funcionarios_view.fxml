@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pizzarialollipop.pizzarialollipop.pizzaria.model.FuncionarioController">
+
+    <!-- Título -->
+    <top>
+        <Label text="Gerenciamento de Funcionários"
+               style="-fx-font-size: 24px; -fx-padding: 10px;"
+               BorderPane.alignment="CENTER"/>
+    </top>
+
+    <!-- Formulário de Cadastro -->
+    <left>
+        <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20px;">
+            <Label text="Nome:"/>
+            <TextField fx:id="txtNome" promptText="Digite o nome do funcionário"/>
+
+            <Label text="Cargo:"/>
+            <TextField fx:id="txtCargo" promptText="Digite o cargo do funcionário"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Adicionar" onAction="#adicionarFuncionario"/>
+                <Button text="Atualizar" onAction="#atualizarFuncionario"/>
+                <Button text="Deletar" onAction="#deletarFuncionario"/>
+            </HBox>
+        </VBox>
+    </left>
+
+    <!-- Tabela de Funcionários -->
+    <center>
+        <TableView fx:id="tabelaFuncionarios" prefWidth="600" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="100"/>
+                <TableColumn fx:id="colNome" text="Nome" prefWidth="250"/>
+                <TableColumn fx:id="colCargo" text="Cargo" prefWidth="250"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- Rodapé -->
+    <bottom>
+        <Label text="© 2025 Pizzaria Lollipop - Todos os direitos reservados"
+               style="-fx-font-size: 12px; -fx-padding: 10px;"
+               BorderPane.alignment="CENTER"/>
+    </bottom>
+</BorderPane>
