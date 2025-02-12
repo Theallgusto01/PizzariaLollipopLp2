@@ -10,4 +10,5 @@ public interface PedidoDAO {
     List<Pedido> readAll(); // Busca todos os pedidos
     void update(Pedido pedido); // Atualiza um pedido existente
     void delete(int id); // Deleta um pedido pelo ID
+
 }

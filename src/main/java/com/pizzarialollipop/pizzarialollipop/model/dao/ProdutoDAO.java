@@ -9,4 +9,5 @@ public interface ProdutoDAO {
     List<Produto> readAll();
     void update(Produto produto);
     void delete(int id);
+
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pizzarialollipop.pizzarialollipop.pizzaria.model.PedidoController">
+    <children>
+        <VBox spacing="10" alignment="CENTER" layoutX="50" layoutY="30">
+            <Label text="Cadastrar Pedido" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+            <GridPane hgap="10" vgap="10">
+                <children>
+                    <Label text="Valor Total:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtValorTotal" promptText="Digite o valor total" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Forma de Pagamento:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtFormaPagamento" promptText="Digite a forma de pagamento" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Troco:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtTroco" promptText="Digite o troco" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="ID Cliente:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtIdCliente" promptText="Digite o ID do cliente" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </children>
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Adicionar" onAction="#adicionarPedido"/>
+                <Button text="Atualizar" onAction="#atualizarPedido"/>
+                <Button text="Deletar" onAction="#deletarPedido"/>
+            </HBox>
+
+            <TableView fx:id="tabelaPedidos" prefHeight="300" prefWidth="700">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colValorTotal" text="Valor Total" prefWidth="100"/>
+                    <TableColumn fx:id="colFormaPagamento" text="Forma de Pagamento" prefWidth="150"/>
+                    <TableColumn fx:id="colTroco" text="Troco" prefWidth="100"/>
+                    <TableColumn fx:id="colDataHora" text="Data/Hora" prefWidth="200"/>
+                    <TableColumn fx:id="colIdCliente" text="ID Cliente" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </children>
+</AnchorPane>

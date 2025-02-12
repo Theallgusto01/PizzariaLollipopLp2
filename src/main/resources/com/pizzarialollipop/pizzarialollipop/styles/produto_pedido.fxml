@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Alert?>
+<?import javafx.scene.control.Alert.AlertType?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.pizzarialollipop.pizzarialollipop.pizzaria.model.ProdutoPedidoController" spacing="10" padding="10">
+    <Label text="Gestão de Produtos no Pedido" font="Arial, 24"/>
+
+    <!-- Formulário de ProdutoPedido -->
+    <HBox spacing="10">
+        <VBox spacing="5">
+            <Label text="ID Produto"/>
+            <TextField fx:id="txtIdProduto" promptText="Digite o ID do Produto" />
+        </VBox>
+        <VBox spacing="5">
+            <Label text="ID Pedido"/>
+            <TextField fx:id="txtIdPedido" promptText="Digite o ID do Pedido"/>
+        </VBox>
+        <VBox spacing="5">
+            <Label text="Quantidade"/>
+            <TextField fx:id="txtQuantidade" promptText="Digite a Quantidade"/>
+        </VBox>
+    </HBox>
+
+    <!-- Botões de Ação -->
+    <HBox spacing="10">
+        <Button text="Adicionar Produto ao Pedido" onAction="#adicionarProdutoPedido"/>
+        <Button text="Atualizar Produto no Pedido" onAction="#atualizarProdutoPedido"/>
+        <Button text="Deletar Produto do Pedido" onAction="#deletarProdutoPedido"/>
+    </HBox>
+
+    <!-- Tabela de ProdutoPedido -->
+    <TableView fx:id="tabelaProdutoPedido" editable="false">
+        <TableColumn fx:id="colIdProduto" text="ID Produto" />
+        <TableColumn fx:id="colIdPedido" text="ID Pedido" />
+        <TableColumn fx:id="colQuantidade" text="Quantidade" />
+    </TableView>
+</VBox>
