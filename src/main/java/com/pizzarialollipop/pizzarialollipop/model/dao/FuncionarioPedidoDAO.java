@@ -8,4 +8,5 @@ public interface FuncionarioPedidoDAO {
     FuncionarioPedido read(int id);
     List<FuncionarioPedido> readAll();
     void delete(int id);
+    void update(FuncionarioPedido funcionarioPedido);
 }
